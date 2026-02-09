@@ -1,0 +1,25 @@
+Jan 15 08:23:01 server sshd[12345]: Failed password for invalid user admin from 192.168.1.100 port 54321 ssh2
+Jan 15 08:23:03 server sshd[12346]: Failed password for invalid user admin from 192.168.1.100 port 54322 ssh2
+Jan 15 08:23:05 server sshd[12347]: Failed password for invalid user root from 192.168.1.100 port 54323 ssh2
+Jan 15 08:23:07 server sshd[12348]: Failed password for invalid user root from 192.168.1.100 port 54324 ssh2
+Jan 15 08:23:09 server sshd[12349]: Failed password for invalid user root from 192.168.1.100 port 54325 ssh2
+Jan 15 08:23:11 server sshd[12350]: Failed password for invalid user test from 192.168.1.100 port 54326 ssh2
+Jan 15 08:23:13 server sshd[12351]: Failed password for invalid user test from 192.168.1.100 port 54327 ssh2
+Jan 15 08:23:15 server sshd[12352]: Failed password for invalid user user from 192.168.1.100 port 54328 ssh2
+Jan 15 08:23:17 server sshd[12353]: Failed password for invalid user guest from 192.168.1.100 port 54329 ssh2
+Jan 15 08:23:19 server sshd[12354]: Failed password for invalid user oracle from 192.168.1.100 port 54330 ssh2
+Jan 15 08:23:21 server sshd[12355]: Failed password for invalid user postgres from 192.168.1.100 port 54331 ssh2
+Jan 15 08:23:23 server sshd[12356]: Failed password for invalid user mysql from 192.168.1.100 port 54332 ssh2
+Jan 15 08:24:01 server sshd[12360]: Accepted password for morgan from 10.0.0.5 port 52100 ssh2
+Jan 15 08:24:02 server sshd[12360]: pam_unix(sshd:session): session opened for user morgan
+Jan 15 09:15:00 server sshd[12400]: Failed password for invalid user admin from 203.0.113.50 port 44001 ssh2
+Jan 15 09:15:02 server sshd[12401]: Failed password for invalid user admin from 203.0.113.50 port 44002 ssh2
+Jan 15 09:15:04 server sshd[12402]: Failed password for invalid user root from 203.0.113.50 port 44003 ssh2
+Jan 15 09:15:06 server sshd[12403]: Failed password for invalid user root from 203.0.113.50 port 44004 ssh2
+Jan 15 09:15:08 server sshd[12404]: Failed password for invalid user root from 203.0.113.50 port 44005 ssh2
+Jan 15 09:15:10 server sshd[12405]: Failed password for invalid user administrator from 203.0.113.50 port 44006 ssh2
+Jan 15 10:00:00 server sshd[12500]: Accepted publickey for deploy from 10.0.0.10 port 55000 ssh2
+Jan 15 10:00:01 server sshd[12500]: pam_unix(sshd:session): session opened for user deploy
+Jan 15 14:30:00 server sshd[12600]: Failed password for morgan from 198.51.100.20 port 60001 ssh2
+Jan 15 14:30:05 server sshd[12601]: Failed password for morgan from 198.51.100.20 port 60002 ssh2
+Jan 15 14:30:30 server sshd[12602]: Accepted password for morgan from 198.51.100.20 port 60003 ssh2

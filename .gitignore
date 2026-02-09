@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# macOS
+.DS_Store
+
+# Virtual environments
+.venv/
+venv/
+
+# Vendored dependencies (regenerate with: ./scripts/vendor_install.sh)
+vendor/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Cache
+.pytest_cache/
+.ruff_cache/
+
+# PyInstaller / packaging
+*.dmg
+packaging/__pycache__/

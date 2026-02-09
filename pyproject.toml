@@ -1,0 +1,55 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "netrecon"
+version = "0.1.0"
+description = "A beginner-friendly network security tools suite"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.9"
+dependencies = [
+    "typer>=0.12.0",
+    "rich>=13.0.0",
+    "scapy>=2.5.0",
+    "dnspython>=2.4.0",
+    "httpx>=0.25.0",
+    "python-whois>=0.9.0",
+    "cryptography>=41.0.0",
+    "PySide6>=6.6.0",
+]
+
+[project.scripts]
+netrecon = "netrecon.cli:app"
+netrecon-gui = "netrecon.gui.app:main"
+
+[project.optional-dependencies]
+test = [
+    "pytest>=8.0",
+    "pytest-cov>=4.0",
+]
+lint = [
+    "ruff>=0.9.0",
+]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=4.0",
+    "ruff>=0.9.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = ["--import-mode=importlib", "-v"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+src = ["src"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.ruff.format]
+indent-style = "space"
