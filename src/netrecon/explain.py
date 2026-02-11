@@ -154,6 +154,75 @@ EXPLANATIONS: dict[str, dict[str, str]] = {
         ),
         "learn_more": "https://en.wikipedia.org/wiki/Subnetwork",
     },
+    "http_fuzzer": {
+        "title": "What is Web Fuzzing?",
+        "body": (
+            "Web fuzzing is like trying different door handles to see which ones "
+            "open. It systematically tests a web server for hidden directories, "
+            "files, and admin panels by sending requests with common path names.\n\n"
+            "Security professionals use fuzzing to:\n"
+            "  - Find forgotten admin panels or backup files\n"
+            "  - Discover exposed configuration files\n"
+            "  - Identify sensitive directories that should be protected\n"
+            "  - Map out a web application's structure\n\n"
+            "Common tools for this include dirb, gobuster, and ffuf. Always get "
+            "permission before fuzzing someone else's server -- excessive requests "
+            "can be disruptive."
+        ),
+        "learn_more": "https://owasp.org/www-community/Fuzzing",
+    },
+    "service_fingerprint": {
+        "title": "What is Service Fingerprinting?",
+        "body": (
+            "Service fingerprinting identifies what software and version is running "
+            "on a network service -- like reading the nameplate on a machine.\n\n"
+            "By analyzing service banners, response patterns, and behavior, you can "
+            "determine:\n"
+            "  - Operating system type and version\n"
+            "  - Web server software (Apache, nginx, IIS)\n"
+            "  - Database versions (MySQL, PostgreSQL)\n"
+            "  - SSH, FTP, and other service versions\n\n"
+            "This information helps security teams find outdated software with known "
+            "vulnerabilities that need patching. Tools like nmap have extensive "
+            "fingerprinting databases."
+        ),
+        "learn_more": "https://en.wikipedia.org/wiki/TCP/IP_stack_fingerprinting",
+    },
+    "vuln_scanner": {
+        "title": "What is Vulnerability Scanning?",
+        "body": (
+            "Vulnerability scanning is an automated health check for computer systems "
+            "and networks. It looks for known security weaknesses that attackers "
+            "could exploit.\n\n"
+            "Scanners check for:\n"
+            "  - Missing security patches\n"
+            "  - Weak configurations (default passwords, insecure settings)\n"
+            "  - Known vulnerabilities (CVEs) in software\n"
+            "  - Missing security headers on websites\n"
+            "  - Exposed admin panels or sensitive files\n\n"
+            "Professional tools include Nessus, OpenVAS, and Qualys. Regular scanning "
+            "is part of good security hygiene -- like getting regular checkups at the "
+            "doctor."
+        ),
+        "learn_more": "https://en.wikipedia.org/wiki/Vulnerability_scanner",
+    },
+    "network_sniffer": {
+        "title": "What is Packet Sniffing?",
+        "body": (
+            "Packet sniffing captures and analyzes network traffic in real-time -- "
+            "like wiretapping a phone line to listen to conversations.\n\n"
+            "Network analysts use sniffing to:\n"
+            "  - Troubleshoot network problems\n"
+            "  - Monitor bandwidth usage\n"
+            "  - Detect malicious traffic patterns\n"
+            "  - Understand how applications communicate\n"
+            "  - Investigate security incidents\n\n"
+            "Popular tools include Wireshark and tcpdump. Sniffing requires special "
+            "privileges (root/admin) because it accesses raw network traffic. Be "
+            "aware: sniffing on networks you don't own is illegal in most places."
+        ),
+        "learn_more": "https://en.wikipedia.org/wiki/Packet_analyzer",
+    },
 }
 
 GLOSSARY: dict[str, str] = {
@@ -261,6 +330,30 @@ GLOSSARY: dict[str, str] = {
         "Packet Capture. A file format (.pcap) for storing recorded network "
         "traffic. Created by tools like tcpdump and Wireshark. Used for "
         "network troubleshooting, security analysis, and forensics."
+    ),
+    "fuzzing": (
+        "A testing technique that sends random or semi-random inputs to "
+        "find bugs and vulnerabilities. Web fuzzing tests URLs with different "
+        "paths to discover hidden files. Protocol fuzzing sends malformed data "
+        "to crash or exploit services."
+    ),
+    "cve": (
+        "Common Vulnerabilities and Exposures. A standardized identifier for "
+        "known security vulnerabilities (e.g., CVE-2021-44228 for Log4Shell). "
+        "Each CVE has a description, severity score (CVSS), and affected "
+        "software versions."
+    ),
+    "fingerprinting": (
+        "The process of identifying systems, services, and software versions "
+        "by analyzing their behavior and responses. OS fingerprinting identifies "
+        "operating systems, while service fingerprinting identifies application "
+        "versions."
+    ),
+    "exploit": (
+        "A piece of software or technique that takes advantage of a "
+        "vulnerability to cause unintended behavior. Exploits can crash systems, "
+        "execute code, steal data, or escalate privileges. Security teams use "
+        "exploits to test defenses."
     ),
 }
 

@@ -23,8 +23,10 @@ class NetReconWindow(QMainWindow):
 
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("NetRecon — Network Security Tools Suite")
-        self.resize(960, 640)
+        self.setWindowTitle(
+            "NetRecon v0.2.0 — Network Security & Penetration Testing Suite"
+        )
+        self.resize(1100, 700)
         self._build_ui()
 
     def _build_ui(self):
@@ -37,16 +39,31 @@ class NetReconWindow(QMainWindow):
         sidebar_layout.setContentsMargins(0, 0, 0, 0)
 
         self._sidebar = QListWidget()
-        self._sidebar.setFixedWidth(180)
-        self._sidebar.setFont(QFont("", 12))
+        self._sidebar.setFixedWidth(220)
+        self._sidebar.setFont(QFont("", 11))
         self._sidebar.setStyleSheet(
-            "QListWidget { background: #2c3e50; color: white;"
-            "border: none; padding-top: 8px; }"
-            "QListWidget::item { padding: 10px 14px; }"
-            "QListWidget::item:selected {"
-            "background: #3498db; color: white; }"
-            "QListWidget::item:hover:!selected {"
-            "background: #34495e; }"
+            "QListWidget { "
+            "background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+            "stop:0 #1e3a5f, stop:1 #2c3e50); "
+            "color: white; "
+            "border: none; "
+            "padding-top: 12px; "
+            "} "
+            "QListWidget::item { "
+            "padding: 12px 16px; "
+            "border-left: 3px solid transparent; "
+            "} "
+            "QListWidget::item:selected { "
+            "background: qlineargradient(x1:0, y1:0, x2:1, y2:0, "
+            "stop:0 #3498db, stop:1 #2980b9); "
+            "color: white; "
+            "border-left: 3px solid #e74c3c; "
+            "font-weight: bold; "
+            "} "
+            "QListWidget::item:hover:!selected { "
+            "background: rgba(52, 152, 219, 0.3); "
+            "border-left: 3px solid #3498db; "
+            "}"
         )
         sidebar_layout.addWidget(self._sidebar)
         splitter.addWidget(sidebar_widget)
@@ -62,7 +79,15 @@ class NetReconWindow(QMainWindow):
 
         # Status bar
         self._status = self.statusBar()
-        self._status.showMessage("Ready")
+        self._status.setStyleSheet(
+            "QStatusBar { "
+            "background: #ecf0f1; "
+            "color: #2c3e50; "
+            "font-size: 11px; "
+            "padding: 4px; "
+            "}"
+        )
+        self._status.showMessage("Ready — Select a tool to begin")
 
         # ── Register panels ──────────────────────────────────
         for panel_cls in ALL_PANELS:

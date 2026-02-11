@@ -40,6 +40,10 @@ ACTIVE_TOOLS = {
     "traceroute",
     "banner_grab",
     "ssl_checker",
+    "http_fuzzer",
+    "service_fingerprint",
+    "vuln_scanner",
+    "network_sniffer",
 }
 
 
@@ -77,14 +81,25 @@ class ToolPanel(QWidget):
 
         # Title
         title = QLabel(self.tool_label)
-        title.setStyleSheet("font-size: 18px; font-weight: bold;")
+        title.setStyleSheet(
+            "font-size: 20px; "
+            "font-weight: bold; "
+            "color: #2c3e50; "
+            "margin-bottom: 4px;"
+        )
         layout.addWidget(title)
 
         # Active badge
         if self.is_active:
             badge = QLabel("⚡ Active tool — sends network traffic")
             badge.setStyleSheet(
-                "color: #e67e22; font-size: 11px; margin-bottom: 4px;"
+                "color: #e67e22; "
+                "font-size: 11px; "
+                "font-weight: 600; "
+                "margin-bottom: 6px; "
+                "padding: 4px 8px; "
+                "background: rgba(230, 126, 34, 0.1); "
+                "border-radius: 3px;"
             )
             layout.addWidget(badge)
 
@@ -92,7 +107,11 @@ class ToolPanel(QWidget):
         self._explain_btn = QPushButton("▸ What is this tool?")
         self._explain_btn.setFlat(True)
         self._explain_btn.setStyleSheet(
-            "text-align: left; color: #3498db; font-size: 12px;"
+            "text-align: left; "
+            "color: #3498db; "
+            "font-size: 12px; "
+            "padding: 4px; "
+            "font-weight: 500;"
         )
         self._explain_btn.setCursor(Qt.CursorShape.PointingHandCursor)
         self._explain_btn.setCheckable(True)
@@ -106,14 +125,21 @@ class ToolPanel(QWidget):
         if learn:
             explain_html += (
                 f'<br><br><a href="{learn}"'
-                f' style="color:#3498db;">Learn more →</a>'
+                f' style="color:#3498db; font-weight: 600;">Learn more →</a>'
             )
         self._explain_text = QLabel(explain_html)
         self._explain_text.setWordWrap(True)
         self._explain_text.setOpenExternalLinks(True)
         self._explain_text.setStyleSheet(
-            "background: #f0f4f8; padding: 10px; border-radius: 6px;"
-            "margin-bottom: 8px; font-size: 12px; color: #333;"
+            "background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+            "stop:0 #e8f4f8, stop:1 #f0f4f8); "
+            "padding: 12px; "
+            "border-radius: 6px; "
+            "border: 1px solid #d0e4f0; "
+            "margin-bottom: 10px; "
+            "font-size: 12px; "
+            "color: #2c3e50; "
+            "line-height: 1.5;"
         )
         self._explain_text.setVisible(False)
         layout.addWidget(self._explain_text)
@@ -127,11 +153,26 @@ class ToolPanel(QWidget):
         # Run button
         self._run_btn = QPushButton(f"▶  Run {self.tool_label}")
         self._run_btn.setStyleSheet(
-            "QPushButton { background: #2ecc71; color: white;"
-            "font-weight: bold; padding: 8px 20px; border-radius: 4px;"
-            "font-size: 13px; }"
-            "QPushButton:hover { background: #27ae60; }"
-            "QPushButton:disabled { background: #95a5a6; }"
+            "QPushButton { "
+            "background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+            "stop:0 #2ecc71, stop:1 #27ae60); "
+            "color: white; "
+            "font-weight: bold; "
+            "padding: 10px 24px; "
+            "border-radius: 5px; "
+            "font-size: 14px; "
+            "border: none; "
+            "} "
+            "QPushButton:hover { "
+            "background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+            "stop:0 #27ae60, stop:1 #229954); "
+            "} "
+            "QPushButton:pressed { "
+            "background: #1e8449; "
+            "} "
+            "QPushButton:disabled { "
+            "background: #95a5a6; "
+            "}"
         )
         self._run_btn.clicked.connect(self._on_run)
         layout.addWidget(self._run_btn)
@@ -140,8 +181,20 @@ class ToolPanel(QWidget):
         self._progress = QProgressBar()
         self._progress.setRange(0, 0)
         self._progress.setVisible(False)
-        self._progress.setMaximumHeight(4)
+        self._progress.setMaximumHeight(6)
         self._progress.setTextVisible(False)
+        self._progress.setStyleSheet(
+            "QProgressBar { "
+            "border: none; "
+            "border-radius: 3px; "
+            "background: #ecf0f1; "
+            "} "
+            "QProgressBar::chunk { "
+            "background: qlineargradient(x1:0, y1:0, x2:1, y2:0, "
+            "stop:0 #3498db, stop:1 #2ecc71); "
+            "border-radius: 3px; "
+            "}"
+        )
         layout.addWidget(self._progress)
 
         # Results
@@ -149,8 +202,26 @@ class ToolPanel(QWidget):
         self._results.setReadOnly(True)
         self._results.setFont(QFont("Menlo, Consolas, monospace", 11))
         self._results.setStyleSheet(
-            "background: #1e1e1e; color: #d4d4d4; padding: 8px;"
-            "border-radius: 4px;"
+            "QTextEdit { "
+            "background: #1e1e1e; "
+            "color: #d4d4d4; "
+            "padding: 12px; "
+            "border-radius: 6px; "
+            "border: 1px solid #34495e; "
+            "selection-background-color: #3498db; "
+            "} "
+            "QScrollBar:vertical { "
+            "background: #2c3e50; "
+            "width: 12px; "
+            "} "
+            "QScrollBar::handle:vertical { "
+            "background: #95a5a6; "
+            "border-radius: 6px; "
+            "min-height: 20px; "
+            "} "
+            "QScrollBar::handle:vertical:hover { "
+            "background: #7f8c8d; "
+            "}"
         )
         self._results.setPlaceholderText("Results will appear here…")
         layout.addWidget(self._results, stretch=1)
@@ -964,6 +1035,374 @@ class LogParserPanel(ToolPanel):
         return "\n".join(lines)
 
 
+class HttpFuzzerPanel(ToolPanel):
+    tool_name = "http_fuzzer"
+    tool_label = "HTTP Fuzzer"
+    is_active = True
+
+    def _build_inputs(self):
+        self._target = QLineEdit()
+        self._target.setPlaceholderText("https://example.com")
+        self._form.addRow("Target URL:", self._target)
+
+        row = QHBoxLayout()
+        self._wordlist = QLineEdit()
+        self._wordlist.setPlaceholderText("(Use built-in wordlist)")
+        browse_btn = QPushButton("Browse…")
+        browse_btn.clicked.connect(self._browse)
+        row.addWidget(self._wordlist, stretch=1)
+        row.addWidget(browse_btn)
+        self._form.addRow("Wordlist file:", row)
+
+        self._timeout = QDoubleSpinBox()
+        self._timeout.setRange(1.0, 60.0)
+        self._timeout.setValue(5.0)
+        self._timeout.setSuffix(" sec")
+        self._form.addRow("Timeout:", self._timeout)
+
+        self._show_404 = QCheckBox("Show 404 Not Found results")
+        self._form.addRow("", self._show_404)
+
+    def _browse(self):
+        path, _ = QFileDialog.getOpenFileName(
+            self, "Select wordlist file", "", "Text Files (*.txt);;All Files (*)"
+        )
+        if path:
+            self._wordlist.setText(path)
+
+    def _collect_inputs(self):
+        target = self._target.text().strip()
+        if not target:
+            raise ValueError("Enter a target URL.")
+        return {
+            "target": target,
+            "wordlist_file": self._wordlist.text().strip() or None,
+            "timeout": self._timeout.value(),
+            "show_404": self._show_404.isChecked(),
+        }
+
+    def _execute(self, inputs):
+        from netrecon.tools.http_fuzzer import DEFAULT_WORDLIST, fuzz_url
+
+        wordlist = DEFAULT_WORDLIST
+        if inputs["wordlist_file"]:
+            try:
+                with open(inputs["wordlist_file"]) as f:
+                    wordlist = [line.strip() for line in f if line.strip()]
+            except FileNotFoundError:
+                raise ValueError(
+                    f"Wordlist file not found: {inputs['wordlist_file']}"
+                ) from None
+
+        results = fuzz_url(
+            inputs["target"], wordlist, inputs["timeout"], inputs["show_404"]
+        )
+        return {"target": inputs["target"], "results": results}
+
+    def _format_result(self, data):
+        results = data["results"]
+        target = data["target"]
+
+        if not results:
+            return f"No accessible paths found on {target}."
+
+        lines = [f"HTTP Fuzzing Results: {target}", ""]
+        lines.append(f"{'Path':<30}{'Status':<15}{'Size':<12}Notes")
+        lines.append("─" * 70)
+
+        for path, (status, length) in sorted(results.items(), key=lambda x: x[1][0]):
+            size = f"{length} bytes" if length > 0 else "-"
+            note = ""
+            if status == 200:
+                note = "Found!"
+            elif status == 403:
+                note = "Forbidden"
+            elif status == 401:
+                note = "Requires auth"
+            elif status in (301, 302):
+                note = "Redirect"
+            elif status == 0:
+                note = "Timeout"
+            elif status == -1:
+                note = "Error"
+
+            lines.append(f"/{path:<29}{status:<15}{size:<12}{note}")
+
+        found = sum(1 for s, _ in results.values() if 200 <= s < 400)
+        forbidden = sum(1 for s, _ in results.values() if s == 403)
+        lines.append("")
+        lines.append(
+            f"Summary: {found} accessible, {forbidden} forbidden "
+            f"out of {len(results)} paths checked"
+        )
+        return "\n".join(lines)
+
+
+class ServiceFingerprintPanel(ToolPanel):
+    tool_name = "service_fingerprint"
+    tool_label = "Service Fingerprinting"
+    is_active = True
+
+    def _build_inputs(self):
+        self._target = QLineEdit()
+        self._target.setPlaceholderText("192.168.1.1 or example.com")
+        self._form.addRow("Target:", self._target)
+
+        self._ports = QLineEdit("21,22,25,80,443,3306,5432,8080")
+        self._form.addRow("Ports:", self._ports)
+
+        self._timeout = QDoubleSpinBox()
+        self._timeout.setRange(0.5, 30.0)
+        self._timeout.setValue(3.0)
+        self._timeout.setSuffix(" sec")
+        self._form.addRow("Timeout:", self._timeout)
+
+    def _collect_inputs(self):
+        target = self._target.text().strip()
+        if not target:
+            raise ValueError("Enter a target host.")
+        return {
+            "target": target,
+            "ports": self._ports.text().strip(),
+            "timeout": self._timeout.value(),
+        }
+
+    def _execute(self, inputs):
+        from netrecon.tools.service_fingerprint import fingerprint_ports
+        from netrecon.utils import parse_port_range, validate_host
+
+        host = validate_host(inputs["target"])
+        port_list = parse_port_range(inputs["ports"])
+        results = fingerprint_ports(host, port_list, inputs["timeout"])
+        return {"host": host, "target": inputs["target"], "results": results}
+
+    def _format_result(self, data):
+        results = data["results"]
+        addr = (
+            f"{data['target']} ({data['host']})"
+            if data["target"] != data["host"]
+            else data["host"]
+        )
+
+        lines = [f"Service Fingerprinting: {addr}", ""]
+        lines.append(f"{'Port':<12}{'Service':<18}Version/Info")
+        lines.append("─" * 60)
+
+        found_services = False
+        for port in sorted(results.keys()):
+            service, version = results[port]
+            if service in ["Closed", "Timeout", "Error"]:
+                continue
+            found_services = True
+            version_display = version if version else "No version info"
+            lines.append(f"{port}/tcp{'':<5}{service:<18}{version_display}")
+
+        if not found_services:
+            return f"No accessible services found on {addr}."
+
+        lines.append("")
+        lines.append(
+            "Note: Fingerprinting relies on banner information. "
+            "Some services may not reveal version details."
+        )
+        return "\n".join(lines)
+
+
+class VulnScannerPanel(ToolPanel):
+    tool_name = "vuln_scanner"
+    tool_label = "Vulnerability Scanner"
+    is_active = True
+
+    def _build_inputs(self):
+        self._target = QLineEdit()
+        self._target.setPlaceholderText("https://example.com")
+        self._form.addRow("Target URL:", self._target)
+
+        self._timeout = QDoubleSpinBox()
+        self._timeout.setRange(1.0, 60.0)
+        self._timeout.setValue(5.0)
+        self._timeout.setSuffix(" sec")
+        self._form.addRow("Timeout:", self._timeout)
+
+    def _collect_inputs(self):
+        target = self._target.text().strip()
+        if not target:
+            raise ValueError("Enter a target URL.")
+        return {"target": target, "timeout": self._timeout.value()}
+
+    def _execute(self, inputs):
+        from netrecon.tools.vuln_scanner import scan_vulnerabilities
+
+        findings = scan_vulnerabilities(inputs["target"], inputs["timeout"])
+        return {"target": inputs["target"], "findings": findings}
+
+    def _format_result(self, data):
+        findings = data["findings"]
+        target = data["target"]
+
+        if not findings:
+            return (
+                f"No common vulnerabilities detected on {target}\n\n"
+                "Note: This is a basic scan. Professional tools like Nessus, "
+                "OpenVAS, or Burp Suite provide more comprehensive testing."
+            )
+
+        lines = [f"Vulnerability Scan Results: {target}", ""]
+        lines.append(f"{'Severity':<12}{'Issue':<30}Finding")
+        lines.append("─" * 75)
+
+        # Sort by severity
+        severity_order = {"HIGH": 0, "MEDIUM": 1, "LOW": 2}
+        sorted_findings = sorted(
+            findings, key=lambda x: severity_order.get(x[0].severity, 3)
+        )
+
+        high_count = 0
+        medium_count = 0
+        low_count = 0
+
+        for check, finding in sorted_findings:
+            severity = check.severity
+            if severity == "HIGH":
+                high_count += 1
+            elif severity == "MEDIUM":
+                medium_count += 1
+            else:
+                low_count += 1
+
+            lines.append(f"{severity:<12}{check.name:<30}{finding}")
+
+        lines.append("")
+        lines.append(
+            f"Summary: {high_count} high, {medium_count} medium, "
+            f"{low_count} low severity issues found"
+        )
+        lines.append("")
+        lines.append(
+            "Recommendation: Address high-severity issues immediately. "
+            "Use professional tools for comprehensive assessment."
+        )
+        return "\n".join(lines)
+
+
+class NetworkSnifferPanel(ToolPanel):
+    tool_name = "network_sniffer"
+    tool_label = "Network Sniffer"
+    is_active = True
+
+    def _build_inputs(self):
+        self._interface = QLineEdit()
+        self._interface.setPlaceholderText("(Auto-detect)")
+        self._form.addRow("Interface:", self._interface)
+
+        self._count = QSpinBox()
+        self._count.setRange(1, 10000)
+        self._count.setValue(100)
+        self._form.addRow("Packet count:", self._count)
+
+        self._filter = QLineEdit()
+        self._filter.setPlaceholderText("tcp port 80")
+        self._form.addRow("BPF filter:", self._filter)
+
+        self._timeout = QSpinBox()
+        self._timeout.setRange(5, 300)
+        self._timeout.setValue(30)
+        self._timeout.setSuffix(" sec")
+        self._form.addRow("Timeout:", self._timeout)
+
+        note = QLabel(
+            "⚠ Note: Packet capture requires root/administrator privileges.\n"
+            "You may need to run the GUI with sudo/admin rights."
+        )
+        note.setStyleSheet("color: #e67e22; font-size: 11px; margin-top: 8px;")
+        note.setWordWrap(True)
+        self._form.addRow("", note)
+
+    def _collect_inputs(self):
+        return {
+            "interface": self._interface.text().strip() or None,
+            "count": self._count.value(),
+            "filter_expr": self._filter.text().strip(),
+            "timeout": self._timeout.value(),
+        }
+
+    def _execute(self, inputs):
+        from scapy.all import sniff
+
+        from netrecon.tools.network_sniffer import analyze_packets
+
+        capture_params = {"store": True, "count": inputs["count"]}
+
+        if inputs["interface"]:
+            capture_params["iface"] = inputs["interface"]
+        if inputs["filter_expr"]:
+            capture_params["filter"] = inputs["filter_expr"]
+        if inputs["timeout"]:
+            capture_params["timeout"] = inputs["timeout"]
+
+        try:
+            packets = sniff(**capture_params)
+            stats = analyze_packets(list(packets))
+            return stats
+        except PermissionError:
+            raise ValueError(
+                "Packet capture requires root/administrator privileges. "
+                "Try running with sudo on Linux/macOS."
+            ) from None
+        except OSError as e:
+            if inputs["interface"]:
+                raise ValueError(
+                    f"Interface '{inputs['interface']}' may not exist. " f"Error: {e}"
+                ) from None
+            raise ValueError(f"Capture error: {e}") from None
+
+    def _format_result(self, stats):
+        lines = [f"Capture Summary: {stats['total']} packets", ""]
+
+        # Protocol distribution
+        if stats["protocols"]:
+            lines.append("── Protocol Distribution ──")
+            for proto, count in stats["protocols"].most_common():
+                pct = (count / stats["total"]) * 100
+                lines.append(f"  {proto:<10}{count:>6}  ({pct:.1f}%)")
+            lines.append("")
+
+        # Top source IPs
+        if stats["src_ips"]:
+            lines.append("── Top Source IPs ──")
+            for ip, count in stats["src_ips"].most_common(10):
+                lines.append(f"  {ip:<20}{count:>6}")
+            lines.append("")
+
+        # Top destination IPs
+        if stats["dst_ips"]:
+            lines.append("── Top Destination IPs ──")
+            for ip, count in stats["dst_ips"].most_common(10):
+                lines.append(f"  {ip:<20}{count:>6}")
+            lines.append("")
+
+        # Top destination ports
+        if stats["dst_ports"]:
+            lines.append("── Top Destination Ports ──")
+            common_ports = {
+                80: "HTTP",
+                443: "HTTPS",
+                22: "SSH",
+                21: "FTP",
+                25: "SMTP",
+                53: "DNS",
+                3306: "MySQL",
+                5432: "PostgreSQL",
+                8080: "HTTP Alt",
+            }
+            for port, count in stats["dst_ports"].most_common(10):
+                service = common_ports.get(port, "")
+                lines.append(f"  {port:<8}{count:>6}  {service}")
+            lines.append("")
+
+        return "\n".join(lines)
+
+
 # ── Panel registry ───────────────────────────────────────────
 
 ALL_PANELS = [
@@ -978,4 +1417,8 @@ ALL_PANELS = [
     TraceroutePanel,
     PcapViewerPanel,
     LogParserPanel,
+    HttpFuzzerPanel,
+    ServiceFingerprintPanel,
+    VulnScannerPanel,
+    NetworkSnifferPanel,
 ]
