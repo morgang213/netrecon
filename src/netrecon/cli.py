@@ -47,17 +47,21 @@ def glossary(
 
 
 # Import and register tool commands
-from netrecon.tools.banner_grab import run as banner_grab_run  # noqa: E402
-from netrecon.tools.dns_lookup import run as dns_lookup_run  # noqa: E402
-from netrecon.tools.header_inspector import run as header_inspector_run  # noqa: E402
-from netrecon.tools.log_parser import run as log_parser_run  # noqa: E402
-from netrecon.tools.pcap_viewer import run as pcap_viewer_run  # noqa: E402
-from netrecon.tools.ping_sweep import run as ping_sweep_run  # noqa: E402
-from netrecon.tools.port_scanner import run as port_scanner_run  # noqa: E402
-from netrecon.tools.ssl_checker import run as ssl_checker_run  # noqa: E402
-from netrecon.tools.subnet_calc import run as subnet_calc_run  # noqa: E402
-from netrecon.tools.traceroute import run as traceroute_run  # noqa: E402
-from netrecon.tools.whois_lookup import run as whois_lookup_run  # noqa: E402
+from netrecon.tools.banner_grab import run as banner_grab_run  # noqa: E402, I001
+from netrecon.tools.dns_lookup import run as dns_lookup_run  # noqa: E402, I001
+from netrecon.tools.header_inspector import run as header_inspector_run  # noqa: E402, I001
+from netrecon.tools.http_fuzzer import run as http_fuzzer_run  # noqa: E402, I001
+from netrecon.tools.log_parser import run as log_parser_run  # noqa: E402, I001
+from netrecon.tools.network_sniffer import run as network_sniffer_run  # noqa: E402, I001
+from netrecon.tools.pcap_viewer import run as pcap_viewer_run  # noqa: E402, I001
+from netrecon.tools.ping_sweep import run as ping_sweep_run  # noqa: E402, I001
+from netrecon.tools.port_scanner import run as port_scanner_run  # noqa: E402, I001
+from netrecon.tools.service_fingerprint import run as service_fingerprint_run  # noqa: E402, I001
+from netrecon.tools.ssl_checker import run as ssl_checker_run  # noqa: E402, I001
+from netrecon.tools.subnet_calc import run as subnet_calc_run  # noqa: E402, I001
+from netrecon.tools.traceroute import run as traceroute_run  # noqa: E402, I001
+from netrecon.tools.vuln_scanner import run as vuln_scanner_run  # noqa: E402, I001
+from netrecon.tools.whois_lookup import run as whois_lookup_run  # noqa: E402, I001
 
 app.command(name="scan", help="Scan ports on a target host to find open services.")(
     port_scanner_run
@@ -89,4 +93,16 @@ app.command(name="logs", help="Parse security logs for suspicious activity.")(
 )
 app.command(name="subnet", help="Calculate subnet ranges and host counts.")(
     subnet_calc_run
+)
+app.command(name="fuzz", help="Discover hidden directories and files on web servers.")(
+    http_fuzzer_run
+)
+app.command(name="fingerprint", help="Identify OS and service versions on targets.")(
+    service_fingerprint_run
+)
+app.command(name="vulnscan", help="Check for common security vulnerabilities.")(
+    vuln_scanner_run
+)
+app.command(name="sniff", help="Capture and analyze live network traffic.")(
+    network_sniffer_run
 )
