@@ -34,4 +34,6 @@ def test_http_fuzzer_wordlist_not_found():
         ["fuzz", "example.com", "--wordlist", "/nonexistent/wordlist.txt", "--yes"],
     )
     assert result.exit_code == 1
-    assert "not found" in result.stdout.lower() or "Error" in result.stdout
+    assert (
+        "not found" in result.stdout.lower() or "error" in result.stdout.lower()
+    )

@@ -29,13 +29,17 @@ a = Analysis(
         "netrecon.tools.banner_grab",
         "netrecon.tools.dns_lookup",
         "netrecon.tools.header_inspector",
+        "netrecon.tools.http_fuzzer",
         "netrecon.tools.log_parser",
+        "netrecon.tools.network_sniffer",
         "netrecon.tools.pcap_viewer",
         "netrecon.tools.ping_sweep",
         "netrecon.tools.port_scanner",
+        "netrecon.tools.service_fingerprint",
         "netrecon.tools.ssl_checker",
         "netrecon.tools.subnet_calc",
         "netrecon.tools.traceroute",
+        "netrecon.tools.vuln_scanner",
         "netrecon.tools.whois_lookup",
         # --- Third-party libraries with lazy/dynamic imports ---
         # scapy: massive package with dynamic layer loading
@@ -134,8 +138,8 @@ app = BUNDLE(
     info_plist={
         "CFBundleName": "NetRecon",
         "CFBundleDisplayName": "NetRecon",
-        "CFBundleShortVersionString": "0.1.0",
-        "CFBundleVersion": "0.1.0",
+        "CFBundleShortVersionString": "0.2.0",
+        "CFBundleVersion": "0.2.0",
         "NSHighResolutionCapable": True,
         "NSRequiresAquaSystemAppearance": False,  # Support dark mode
         "LSMinimumSystemVersion": "10.15",

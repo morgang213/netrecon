@@ -1,7 +1,7 @@
 """Vulnerability Scanner - Check for common security vulnerabilities."""
 
 import re
-from typing import Optional
+from typing import Callable, Optional
 
 import httpx
 import typer
@@ -24,7 +24,7 @@ class VulnerabilityCheck:
         name: str,
         severity: str,
         description: str,
-        check_func: callable,
+        check_func: Callable,
     ):
         self.name = name
         self.severity = severity
